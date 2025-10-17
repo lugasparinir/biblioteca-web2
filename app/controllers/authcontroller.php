@@ -1,7 +1,7 @@
 <?php
 
 
-require_once 'views/AuthView.php'; // Necesitarás una vista para el formulario
+require_once 'views/AuthView.php'; 
 
 class AuthController {
     
@@ -39,3 +39,4 @@ class AuthController {
         }
     }
 
+}
