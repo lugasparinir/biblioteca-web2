@@ -1,16 +1,19 @@
 <?php
 require_once 'models/libromodel.php';
 require_once 'views/libroview.php';
+require_once 'helpers/authelper.php'; //control de acceso
 
 class librocontroller{
     private $model;
     private $view;
+    private $personamodel
 
 
    
     public function __construct(){
         $this->model=new libromodel();
         $this->view=new libroview();
+        $this->personaModel = new personaModel();
     }
 
     public function showlibros(){ //llama 'listar' en router.php
@@ -19,7 +22,7 @@ class librocontroller{
         }
 
      function addlibro(){
-        
+        authhelper::checkLogged();
         $tittle=$_POST['nombre'];
         $autor=$_POST['autor'];
         $descrip=$_POST['descripcion'];
@@ -31,8 +34,9 @@ class librocontroller{
     }
 
     function deletelibro($id){
+        authhelper::checkLogged();
         $this->model->deletelibro($id);
-        header("location:".base_url)."listar";
+        header("location:".base_url ."listar");
     }
      
     public function showlibro(){ 
@@ -41,6 +45,7 @@ class librocontroller{
         }
 
     public function updatelibro(){ 
+        authhelper::checkLogged();
        $libros=$this->model->getalllibrobyid();
        $this->view->updatelibro($libro);  
         }    

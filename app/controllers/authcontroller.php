@@ -1,6 +1,6 @@
 <?php
 
-
+require_once 'helpers/authhelper.php';
 require_once 'views/AuthView.php'; 
 
 class AuthController {
@@ -11,14 +11,14 @@ class AuthController {
         $this->view = new AuthView(); 
     }
 
-    public function showLogin($error = null) {
+    public function showlogin($error = null) {
         $this->view->showLogin($error);
     }
 
     
-    public function verifyLogin() {
+    public function verifylogin() {
         if (empty($_POST['user'])) || empty($_POST['password']) {
-            $this->showLogin("Faltan datos de usuario o contraseña.");
+            $this->showlogin("Faltan datos de usuario o contraseña.");
             return;
         }
 
@@ -35,7 +35,7 @@ class AuthController {
             header("Location: " . BASE_URL . "listarlibros"); 
             die();
         } else { //falla login
-            $this->showLogin("Usuario o contraseña inválidos.");
+            $this->showlogin("Usuario o contraseña inválidos.");
         }
     }
 

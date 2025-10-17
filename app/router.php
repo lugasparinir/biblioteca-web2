@@ -1,6 +1,7 @@
 <?php
 require_once './app/controllers/librocontroller.php';
-
+require_once './app/controllers/personacontroller.php';
+require_once './app/controllers/authcontroller.php';
 
 //creo constante con la url base (define base)
 // server name = variable superglobal de PHP que contiene el nombre del host del servidor
@@ -34,5 +35,10 @@ switch($params[0]){
     case 'editar':
           $Lcontroller=new librocontroller();
           $Lcontroller->updateLibro();
-       
+    case 'login':
+        $Acontroller=new authcontroller();
+        $Acontroller->showlogin();
+    case 'verifylogin':
+        $Acontroller=new authcontroller();
+        $Acontroller->verifylogin();
 }
