@@ -40,7 +40,7 @@ class librocontroller{
     }
      
     public function showlibro(){ 
-       $libros=$this->model->getalllibrobyid();
+       $libros=$this->model->getallibrobyid();
        $this->view->showlibro($libro);  
         }
 

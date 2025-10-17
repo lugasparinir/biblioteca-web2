@@ -5,7 +5,7 @@ require_once 'helpers/authhelper.php';
 class libroView {
    private $base_url=BASE_URL;
 
-public function showLibros($libros, $islogged) {
+public function showlibros($libros, $islogged) {
         
         require 'templates/header.phtml';
         require 'templates/listadolibros.phtml'; 
