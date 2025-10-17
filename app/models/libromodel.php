@@ -15,27 +15,27 @@ class libroModel {
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
-    // Método para showlibros()
+    
     public function getAllLibros() {
-        $query = $this->db->prepare("");
+        $query = $this->db->prepare("SELECT id, nombre, autor, descripcion, `id-persona` FROM libro");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     
     
-    public function insertLibro($titulo, $autor, $descripcion, $idCategoria) {
-        $query = $this->db->prepare("INSERT INTO libro (titulo, autor, descripcion, id_categoria) VALUES (?, ?, ?, ?)");
+    public function addLibro($titulo, $autor, $descripcion, $idpersona) {
+        $query = $this->db->prepare(("INSERT INTO libro (nombre, autor, descripcion, `id-persona`) VALUES (?, ?, ?, ?)"));
         $query->execute([$titulo, $autor, $descripcion, $idCategoria]);
         return $this->db->lastInsertId();
     }
     
     public function deleteLibro($id) {
-        $query = $this->db->prepare("");
+        $query = $this->db->prepare("DELETE FROM libro WHERE id = ?");
         $query->execute([$id]);
     }
 
    public function getLibroById($id) {
-    $query = $this->db->prepare("");
+    $query = $this->db->prepare("SELECT id, nombre, autor, descripcion, `id-persona` FROM libro WHERE id = ?";"");
 
    
     $query->execute([$id]);
@@ -43,9 +43,9 @@ class libroModel {
     return $query->fetch(PDO::FETCH_OBJ);
 }
     public function updateLibro($id, $titulo, $autor, $descripcion, $idCategoria) {
-    $query = $this->db->prepare("");
+    $query = $this->db->prepare("UPDATE libro SET nombre = ?, autor = ?, descripcion = ?, `id-persona` = ? WHERE id = ?";"");
     $query->execute([
-        $titulo,$autor,$descripcion,$idpersona,$id           
+         $titulo,$autor,$descripcion,$idpersona,$id           
     ]);
 }
 } 

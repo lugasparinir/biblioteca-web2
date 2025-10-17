@@ -34,6 +34,15 @@ class librocontroller{
         $this->model->deletelibro($id);
         header("location:".base_url)."listar";
     }
+     
+    public function showlibro(){ 
+       $libros=$this->model->getalllibrobyid();
+       $this->view->showlibro($libro);  
+        }
 
+    public function updatelibro(){ 
+       $libros=$this->model->getalllibrobyid();
+       $this->view->updatelibro($libro);  
+        }    
     
 }

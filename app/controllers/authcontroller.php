@@ -17,7 +17,7 @@ class AuthController {
 
     
     public function verifyLogin() {
-        if (empty($_POST['user']) || empty($_POST['password'])) {
+        if (empty($_POST['user'])) || empty($_POST['password']) {
             $this->showLogin("Faltan datos de usuario o contraseña.");
             return;
         }

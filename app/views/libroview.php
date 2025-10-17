@@ -15,11 +15,11 @@ class libroView {
 
 
     public function showLibros($libros) {
-        $this->render('publiclistadolibros', ['libros' => $libros]);
+        $this->render('listadolibros', ['libros' => $libros]);
     }
 
 
-    public function showLibroDetalle($libro) {
-        $this->render('publicdetallelibro', ['libro' => $libro]);
+    public function showLibro($libro) {
+        $this->render('detallelibro', ['libro' => $libro]);
     }
 }

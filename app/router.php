@@ -28,5 +28,11 @@ switch($params[0]){
     case 'borrarlibro':
         $Lcontroller=new librocontroller();
         $Lcontroller->deletelibro(); 
+    case 'mostrarlibro':
+         $Lcontroller=new librocontroller();
+         $Lcontroller->showlibro();
+    case 'editar':
+          $Lcontroller=new librocontroller();
+          $Lcontroller->updateLibro();
        
 }
