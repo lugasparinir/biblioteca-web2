@@ -17,6 +17,7 @@ class AuthController {
 
     
     public function verifylogin() {
+        
         if (empty($_POST['user'])) || empty($_POST['password']) {
             $this->showlogin("Faltan datos de usuario o contraseña.");
             return;
@@ -27,8 +28,7 @@ class AuthController {
 
     
         if ($user === "webadmin" && $password === "admin") {
-            
-            session_start();
+            AuthHelper::startsession();
             $_SESSION['IS_LOGGED'] = true;
             $_SESSION['USER_NAME'] = $user; 
             

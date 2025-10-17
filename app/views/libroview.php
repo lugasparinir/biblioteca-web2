@@ -12,7 +12,7 @@ public function showlibros($libros, $islogged) {
         require 'templates/footer.phtml';
     }
 
-    public function showlibro($libro) {
+    public function showlibro($libro, $islogged) {
         require 'templates/header.phtml';
         require 'templates/librosingular.phtml';
         require 'templates/footer.phtml';
