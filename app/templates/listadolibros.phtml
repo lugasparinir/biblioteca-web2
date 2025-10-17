@@ -1,0 +1,29 @@
+<main class="container">
+    <h1>Listado de Libros</h1>
+    
+    <?php if ($isLogged): ?>
+        <p><a href="<?php echo $this->base_url . 'agregarlibro'; ?>" class="btn-add"> Agregar Libro</a></p>
+    <?php endif; ?>
+
+    <ul class="lista-libros">
+        <?php foreach ($libros as $libro): ?>
+            <li class="libro">
+                <a href="<?php echo $this->base_url . 'mostrarlibro/' . $libro->id; ?>">
+                    <h2><?php echo $libro->nombre; ?></h2>
+                </a>
+                
+                <p>Autor:<?php echo $libro->autor; ?></p>
+                <p>Persona que lo posee:<strong><?php echo $libro->nombre_persona; ?></strong></p> 
+
+                <?php if ($isLogged): ?>
+                    <a href="<?php echo $this->base_url . 'editarlibro/' . $libro->id; ?>">Editar</a>
+                    <a href="<?php echo $this->base_url . 'borrarlibro/' . $libro->id; ?>">Eliminar</a>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+    <?php if (empty($libros)): ?>
+        <p>No hay libros cargados en el sistema por el momento</p>
+    <?php endif; ?>
+</main>
