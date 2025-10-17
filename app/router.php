@@ -1,6 +1,5 @@
 <?php
 require_once './app/controllers/librocontroller.php';
-require_once './app/controllers/personacontroller.php';
 require_once './app/controllers/authcontroller.php';
 
 //creo constante con la url base (define base)

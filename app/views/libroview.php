@@ -1,25 +1,20 @@
-
 <?php
 
+require_once 'helpers/authhelper.php';
 
 class libroView {
+   private $base_url=BASE_URL;
 
-
-    private function render($template, $data = []) {
-        extract($data); 
+public function showLibros($libros, $islogged) {
         
-        include 'templates/header.phtml'; 
-        include "templates/{$template}.phtml"; // Carga el contenido dinámico
-        include 'templates/footer.phtml';
+        require 'templates/header.phtml';
+        require 'templates/listadolibros.phtml'; 
+        require 'templates/footer.phtml';
     }
 
-
-    public function showLibros($libros) {
-        $this->render('listadolibros', ['libros' => $libros]);
-    }
-
-
-    public function showLibro($libro) {
-        $this->render('detallelibro', ['libro' => $libro]);
+    public function showlibro($libro) {
+        require 'templates/header.phtml';
+        require 'templates/librosingular.phtml';
+        require 'templates/footer.phtml';
     }
 }
