@@ -1,0 +1,28 @@
+<?php
+require_once 'helpers/AuthHelper.php';
+$isLogged = AuthHelper::isLogged(); 
+$userName = $_SESSION['USER_NAME'] ?? 'Administrador'; // Obtiene el nombre si está logueado
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca </title>
+</head>
+<body>
+
+    <header class="header">
+        
+        <nav>
+            <a href="<?php echo $this->base_url . 'listarlibros'; ?>" class="nav-link">Libros:</a>
+            
+
+            <?php if ($isLogged): ?>
+                <span class="adminsection">
+                    Hola, <?php echo htmlspecialchars($userName); ?>
+                    |
+                    <a href="<?php echo $this->base_url . 'logout'; ?>" class="btn-logout">Cerrar Sesión</a>
+                </span>
+        </nav>
+    </header>
