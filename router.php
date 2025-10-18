@@ -8,7 +8,7 @@ require_once './app/controllers/authcontroller.php';
 // php self=contiene la ruta y nombre del archivo actual que se está ejecutando
 define('base_url','//'.$_SERVER['server_name'].':'.$_SERVER['server_port'].dirname($_SERVER['php_self']).'/');
 
-$action='listar' //accion por defecto
+$action='listarlibros' //accion por defecto
 
 if(!empty($_GET['action'])){  
     $action=$_GET['action'];  //si no esta vacia la accion le asigno ese valor sino listeo
