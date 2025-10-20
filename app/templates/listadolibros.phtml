@@ -1,35 +1,19 @@
-<main class="container">
-    <h1>Listado de Libros</h1>
-    
-    <?php if ($islogged): ?>
-        <p><a href="<?php echo $this->base_url . 'agregarlibro'; ?>" class="btnadd">Agregar Libro</a></p>
-    <?php endif; ?>
-
-    <?php if (!empty($libros)): ?>
-        <ul class="listalibros">
-            <?php foreach ($libros as $libro): ?>
-                <li class="libro">
-                    
-                    <a href="<?php echo $this->base_url . 'mostrarlibro/' . $libro->id; ?>">
-                        <h2><?php echo htmlspecialchars($libro->nombre); ?></h2> 
-                    </a>
-                    
-                    <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
-                    <p>El Libro Lo Posee: <a href="<?php echo $this->base_url . 'librospertenecientes/' . $libro->{'id-persona'}; ?>"><?php echo htmlspecialchars($libro->nombre_persona); ?> </a></p>
-                             
-                    <?php if ($islogged): ?>
-                        <div class="adminactions">
-                            <a href="<?php echo $this->base_url . 'editarlibro/' . $libro->id; ?>">Editar</a>
-                            |
-                            <a href="<?php echo $this->base_url . 'borrarlibro/' . $libro->id; ?>"  class="btndelete">Eliminar</a>
-                        </div>
+<?php if (!empty($libros)): ?>
+    <ul class="listalibros">
+        <?php foreach ($libros as $libro): ?>
+            <li class="libro">
+                
+                <a href="<?php echo BASE_URL . 'mostrarlibro/' . $libro->id; ?>">
+                    <h2><?php echo htmlspecialchars($libro->nombre); ?></h2> 
+                </a>
+                
+                <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
+                
+                <p>Género: <a href="<?php echo BASE_URL . 'libros_por_genero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
+                            
+                <?php if ($islogged): ?>
                     <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>No hay libros cargados en el sistema por ahora</p>
-    <?php endif; ?>
-    
-   
-</main
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>

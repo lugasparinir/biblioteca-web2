@@ -2,10 +2,6 @@
 require_once './app/controllers/librocontroller.php';
 require_once './app/controllers/authcontroller.php';
 
-//creo constante con la url base (define base)
-// server name = variable superglobal de PHP que contiene el nombre del host del servidor
-//server port= contiene el puerto del servidor web
-// php self=contiene la ruta y nombre del archivo actual que se está ejecutando
 define('base_url','//'.$_SERVER['server_name'].':'.$_SERVER['server_port'].dirname($_SERVER['php_self']).'/');
 
 $action='listarlibros' //accion por defecto
@@ -14,30 +10,48 @@ if(!empty($_GET['action'])){
     $action=$_GET['action'];  //si no esta vacia la accion le asigno ese valor sino listeo
 }
 
+
 $params=explode('/', $action); //parsea accion (obtiee id de accion)
+
+$request = new StdClass();
+$request = (new SessionMiddleware())->run($request);
+
 
 switch($params[0]){
     case 'listarlibros':
-        $Lcontroller=new librocontroller();
-        $Lcontroller->showlibros();
+        $Lcontroller = new librocontroller();
+        $Lcontroller->showlibros($request);
         break;
     case 'agregarlibro':
-        $Lcontroller=new librocontroller();
-        $Lcontroller->addlibro();
+        $request = (new GuardMiddleware())->run($request);
+        $Lcontroller = new librocontroller();
+        $Lcontroller->addlibro($request);
         break;
     case 'borrarlibro':
-        $Lcontroller=new librocontroller();
-        $Lcontroller->deletelibro(); 
+        $request = (new GuardMiddleware())->run($request);
+        $Lcontroller = new librocontroller();
+        $request->id = $params[1];
+        $Lcontroller->deletelibro($request);
+        break;
     case 'mostrarlibro':
-         $Lcontroller=new librocontroller();
-         $Lcontroller->showlibro();
+         $request = (new GuardMiddleware())->run($request);
+        $Lcontroller = new librocontroller();
+        $request->id = $params[1];
+        $Lcontroller->showlibro($request);
+        break;
     case 'editar':
-          $Lcontroller=new librocontroller();
-          $Lcontroller->updateLibro();
-    case 'login':
-        $Acontroller=new authcontroller();
-        $Acontroller->showlogin();
+        $request = (new GuardMiddleware())->run($request);
+        $Lcontroller = new librocontroller();
+        $request->id = $params[1];
+        $Lcontroller->updateLibro($request);
+        break;
+     case 'login':
+        $Acontroller = new authController();
+        $Acontroller->showlogin($request);
+        break;
     case 'verifylogin':
-        $Acontroller=new authcontroller();
-        $Acontroller->verifylogin();
+        $Acontroller = new authController();
+        $Acontroller->verifylogin($request);
+        break;
+
 }

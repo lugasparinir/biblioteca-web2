@@ -12,7 +12,7 @@ protected $db;
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getuserbyemail($email){
+    public function getbyemail($email){
         $query = $this->db->prepare("SELECT * FROM `admin` WHERE email = ?") 
         $query->execute([$email]);
 
@@ -21,3 +21,5 @@ protected $db;
         return $admin;
     }
 }
+
+

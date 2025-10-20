@@ -15,39 +15,42 @@ class libroModel {
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
-    
-    public function getAllLibros() {
-        $query = $this->db->prepare("SELECT l.id, l.nombre, l.autor, l.descripcion, l.`id-persona`,p.nombre AS nombre_persona FROM libro  INNER JOIN persona p ON l.`id-persona` = p.id" ""); 
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
-    
-    
-    
-    
-    public function addLibro($titulo, $autor, $descripcion, $idpersona) {
-        $query = $this->db->prepare(("INSERT INTO libro (nombre, autor, descripcion, `id-persona`) VALUES (?, ?, ?, ?)"));
-        $query->execute([$titulo, $autor, $descripcion, $idpategoria]);
-        return $this->db->lastInsertId();
-    }
-    
-    public function deleteLibro($id) {
-        $query = $this->db->prepare("DELETE FROM libro WHERE id = ?");
-        $query->execute([$id]);
-    }
 
-   public function getLibroById($id) { //join para obtener nombre persona
-    $query = $this->db->prepare (" SELECT l.id, l.nombre, l.autor, l.descripcion, l.`id-persona`, p.nombre AS nombre_persona FROM libro l INNER JOIN persona p ON l.`id-persona` = p.id ");
-
+   
+    
+    public function getalllibros() {
+    $query = $this->db->prepare('SELECT l.*, g.nombre AS nombre_genero FROM libro l JOIN genero g ON l.id_genero = g.id_genero'); //JOIN para obtener nombre genero (categoria)
+    $query->execute();
+    $libros = $query->fetchAll(PDO::FETCH_OBJ);
+    return $libros;
+}
+public function getlibrobyId($id) {
+    $query = $this->db->prepare('SELECT l.*, g.nombre AS nombre_genero FROM libro l JOIN genero g ON l.id_genero = g.id_genero WHERE l.id = ?');
     $query->execute([$id]);
-.
-    return $query->fetch(PDO::FETCH_OBJ);
+    $libro = $query->fetch(PDO::FETCH_OBJ);
+    return $libro;
 }
-    public function updateLibro($id, $titulo, $autor, $descripcion, $idpersona) {
-    $query = $this->db->prepare("UPDATE libro SET nombre = ?, autor = ?, descripcion = ?, `id-persona` = ? WHERE id = ?";"");
-    $query->execute([
-         $titulo,$autor,$descripcion,$idpersona,$id           
-    ]);
-}
-} 
+
+function insertarlibro($nombre, $autor, $descripcion, $idgenero) { 
     
+    $query = $this->db->prepare("INSERT INTO libro (nombre, autor, descripcion, id_genero) VALUES(?,?,?,?)");
+    $query->execute([$nombre, $autor, $descripcion, $idgenero]); 
+
+    
+
+    function deleteLibro($id) {
+        $query = $this->db->prepare('DELETE from libro where id = ?');
+        $query->execute([$id]);
+
+        
+    }
+
+  function updatelibro($id, $nombre, $autor, $descripcion, $idgenero) { 
+    $query = $this->db->prepare('UPDATE libro SET nombre = ?, autor = ?, descripcion = ?, id_genero = ? WHERE id = ?');
+    $query->execute([$nombre, $autor, $descripcion, $idgenero, $id]);
+}
+}
+
+    
+
+
