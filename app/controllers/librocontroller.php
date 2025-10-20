@@ -34,8 +34,9 @@ class librocontroller{
         $tittle=$_POST['titulo'];
         $autor=$_POST['autor'];
         $idgenero=$_POST['genero'];
+        $descrip =$_POST['descripcion'];
 
-       $this->model->insertarLibro($nombre, $autor, $descrip, $idgenero);
+       $this->model->insertarLibro($tittle, $autor, $descrip, $idgenero);
              header("location:".BASE_URL."listarlibros"); 
              return;
     }

@@ -4,7 +4,7 @@ require_once './app/middleware/guardmiddleware.php';
 require_once './app/controllers/librocontroller.php';
 require_once './app/controllers/authcontroller.php';
 
-define('ROOT_PATH', __DIR__ . '/');
+
 if (isset($_SERVER['SERVER_NAME']) && isset($_SERVER['SERVER_PORT']) && isset($_SERVER['PHP_SELF'])) {
     define('base_url','//'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']).'/');
 }
@@ -28,34 +28,34 @@ switch($params[0]){
         $Lcontroller->showlibros($request);
         break;
     case 'agregarlibro':
-        $request = (new GuardMiddleware())->run($request);
+        $request = (new guardmiddleware())->run($request);
         $Lcontroller = new librocontroller();
         $Lcontroller->addlibro($request);
         break;
     case 'borrarlibro':
-        $request = (new GuardMiddleware())->run($request);
+        $request = (new guardmiddleware())->run($request);
         $Lcontroller = new librocontroller();
         $request->id = $params[1];
         $Lcontroller->deletelibro($request);
         break;
     case 'mostrarlibro':
-         $request = (new GuardMiddleware())->run($request);
+         $request = (new guardmiddleware())->run($request);
         $Lcontroller = new librocontroller();
         $request->id = $params[1];
         $Lcontroller->showlibro($request);
         break;
     case 'editar':
-        $request = (new GuardMiddleware())->run($request);
+        $request = (new guardmiddleware())->run($request);
         $Lcontroller = new librocontroller();
         $request->id = $params[1];
         $Lcontroller->updateLibro($request);
         break;
      case 'login':
-        $Acontroller = new authController();
+        $Acontroller = new authcontroller();
         $Acontroller->showlogin($request);
         break;
     case 'verifylogin':
-        $Acontroller = new authController();
+        $Acontroller = new authcontroller();
         $Acontroller->verifylogin($request);
         break;
 

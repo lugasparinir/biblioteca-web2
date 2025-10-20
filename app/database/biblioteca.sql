@@ -86,7 +86,7 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_genero` (`id-genero`);
+  ADD KEY `id_genero` (`id_genero`);
 
 --
 -- Restricciones para tablas volcadas
@@ -96,14 +96,14 @@ ALTER TABLE `libro`
 -- Filtros para la tabla `libro`
 --
 ALTER TABLE `libro`
-  ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id-genero`) REFERENCES `genero` (`id_genero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`id_genero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
-INSERT INTO `genero` (`id_genero`, `nombre`) VALUES (1, 'romance');
+INSERT INTO `genero` (`id_genero`, `nombre`, `descripcion`) VALUES (1, 'romance', 'historias de amor muy bonitas');
 INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('librodeamor', 'juancho', 1);
 
 
-INSERT INTO `genero` (`id_genero`, `nombre`) VALUES (2, 'terror');
+INSERT INTO `genero` (`id_genero`, `nombre`, `descripcion`) VALUES (2, 'terror','para un buen susto a la noche' );
 INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('las aventuras', 'pepe', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

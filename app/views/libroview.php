@@ -5,7 +5,7 @@ class libroview {
         $cuenta = count($libros);
 
     
-        require_once '../templates/listadolibros.phtml';
+        require_once 'app/templates/listadolibros.phtml';
     }
 
     public function showerror($error, $user) {

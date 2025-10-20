@@ -1,8 +1,12 @@
 
+     <head>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
+</head>
+    
 <?php
 require_once 'app/helpers/authhelper.php';
 $isLogged = AuthHelper::isLogged(); 
-$userName = $_SESSION['USER_NAME'] ?? 'Administrador';
+$userName = $_SESSION['USER_NAME'] ?? 'Admin';
 ?>
 <body>
 

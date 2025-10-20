@@ -7,7 +7,7 @@ class libroModel {
     
     public function __construct() {
         if (!defined('MYSQL_HOST')) { 
-            require_once  ROOT_PATH . 'app/config.php';
+            require_once 'config.php';
         }
         
         // Conexión a la base de datos
