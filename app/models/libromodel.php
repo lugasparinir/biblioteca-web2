@@ -37,7 +37,7 @@ function insertarlibro($nombre, $autor, $descripcion, $idgenero) {
     $query->execute([$nombre, $autor, $descripcion, $idgenero]); 
 
     
-
+}
     function deleteLibro($id) {
         $query = $this->db->prepare('DELETE from libro where id = ?');
         $query->execute([$id]);
@@ -50,6 +50,7 @@ function insertarlibro($nombre, $autor, $descripcion, $idgenero) {
     $query->execute([$nombre, $autor, $descripcion, $idgenero, $id]);
 }
 }
+
 
     
 

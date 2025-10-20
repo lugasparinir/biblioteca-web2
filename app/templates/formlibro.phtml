@@ -1,0 +1,28 @@
+
+<form  method="POST">
+    <div class="row">
+        <div class="col-9">
+                <label>Titulo libro</label>
+                <input required name="titulo" type="text">
+        </div>
+
+        <div>
+            <div >
+                <label>Genero</label>
+                <select required name="genero">
+                    <option value="1">aventura</option>
+                    <option value="2">ciencia ficcion</option>
+                    <option value="3">romance</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div >
+        <label>Autor</label>
+        <textarea name="autor"></textarea>
+    </div>
+
+    <button type="submit">Guardar libro</button>
+</form>

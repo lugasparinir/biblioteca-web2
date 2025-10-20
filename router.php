@@ -1,4 +1,6 @@
 <?php
+require_once 'middlewares/sessionmiddleware.php';
+require_once 'middlewares/guardmiddleware.php';
 require_once './app/controllers/librocontroller.php';
 require_once './app/controllers/authcontroller.php';
 

@@ -29,15 +29,13 @@ class AuthController {
 
         $admindb = $this->adminmodel->getbyemail($user);
 
-        if($admindb && password_verify($contraseña, $admindb->contraseña)) {
-            $_SESSION['ADMIN_ID'] = $userFromDB->id;
-            $_SESSION['ADMIN_EMAIL'] = $userFromDB->usuario;
-            header("Location: ".BASE_URL."listar");
-            return;
-        } else {
-            return $this->view->showlogin("Usuario o contraseña incorrecta", $request->user);
-        }
-    }
+      if($admindb && password_verify($contraseña, $admindb->contraseña)) {
+      session_start(); 
+     $_SESSION['USER_ID'] = $admindb->id; 
+     $_SESSION['IS_LOGGED'] = true;
+      header("Location: ".BASE_URL."listarlibros"); 
+      return;
+}
 
     public function logout($request) {
         session_destroy();

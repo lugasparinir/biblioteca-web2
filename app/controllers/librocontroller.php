@@ -17,7 +17,7 @@ class librocontroller{
         
     }
 
-    public function showlibros(){ //llama 'listarlibros' en router.php
+    public function showlibros($request){ //llama 'listarlibros' en router.php
        $libros=$this->model->getalllibros();
        $this->view->showlibros($libros,$request->user);  //le paso los datos a la vista del libro y del user para el login
         }
@@ -31,10 +31,9 @@ class librocontroller{
         authhelper::checkLogged();
     
       
-        $tittle=$_POST['nombre'];
+        $tittle=$_POST['titulo'];
         $autor=$_POST['autor'];
-        $descrip=$_POST['descripcion'];
-        $idpersona=$_POST['idpersona'];
+        $idgenero=$_POST['genero'];
 
        $this->model->insertarLibro($nombre, $autor, $descrip, $idgenero);
              header("location:".BASE_URL."listarlibros"); 

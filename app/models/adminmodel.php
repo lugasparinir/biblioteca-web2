@@ -13,7 +13,7 @@ protected $db;
     }
 
     public function getbyemail($email){
-        $query = $this->db->prepare("SELECT * FROM `admin` WHERE email = ?") 
+        $query = $this->db->prepare("SELECT * FROM `admin` WHERE email = ?"); 
         $query->execute([$email]);
 
         $admin=$query-> fetch (PDO::FETCH_OBJ);
