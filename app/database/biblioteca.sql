@@ -62,7 +62,7 @@ CREATE TABLE `libro` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `autor` text NOT NULL,
-  `id-genero` int(11) NOT NULL
+  `id_genero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -86,7 +86,7 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id-genero` (`id-genero`);
+  ADD KEY `id_genero` (`id-genero`);
 
 --
 -- Restricciones para tablas volcadas
