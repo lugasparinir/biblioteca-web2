@@ -1,7 +1,7 @@
 <?php
 
 require_once 'helpers/authhelper.php';
-require_once 'views/AuthView.php'; 
+require_once 'views/authview.php'; 
 require_once 'models/adminmodel.php';
 
 class AuthController {
@@ -10,38 +10,41 @@ class AuthController {
     private $adminmodel;
 
     public function __construct() {
-        $this->view = new AuthView(); 
+        $this->view = new authview(); 
         $this->adminmodel= new adminmodel();
     }
 
-    public function showlogin($error = null) {
-        $this->view->showLogin($error);
+   
+     public function showlogin($request) {
+        $this->view->showlogin("", $request->user);
     }
 
-    
-    public function verifylogin() {
-        
-        if (empty($_POST['email'])) || empty($_POST['password']) {
-            $this->showlogin("Faltan datos de usuario o contraseña.");
-            return;
+    public function verifyogin($request) {
+        if(empty($_POST['email']) || empty($_POST['contraseña'])) {
+            return $this->view->showLogin("Faltan datos obligatorios", $request->user);
         }
 
         $user = $_POST['email'];
-        $password = $_POST['password'];
+        $contraseña = $_POST['contraseña'];
 
-        $admindb=$this->adminmodel->getuserbyemail($user);
+        $admindb = $this->adminmodel->getbyemail($user);
 
-    
-        if ($admindb && password_verify($password,$admindb->contraseña)) {
-            AuthHelper::startsession();
-            $_SESSION['IS_LOGGED'] = true;
-            $_SESSION['USER_NAME'] = $user; 
-            
-            header("Location: " . BASE_URL . "listarlibros"); 
-            die();
-        } else { //falla login
-            $this->showlogin("Usuario o contraseña inválidos.");
+        if($admindb && password_verify($contraseña, $admindb->contraseña)) {
+            $_SESSION['ADMIN_ID'] = $userFromDB->id;
+            $_SESSION['ADMIN_EMAIL'] = $userFromDB->usuario;
+            header("Location: ".BASE_URL."listar");
+            return;
+        } else {
+            return $this->view->showlogin("Usuario o contraseña incorrecta", $request->user);
         }
     }
+
+    public function logout($request) {
+        session_destroy();
+        header("Location: ".BASE_URL."login");
+        return;
+    }
+
+
 
 }
