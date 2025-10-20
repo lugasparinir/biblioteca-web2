@@ -6,20 +6,20 @@
 <?php
 require_once 'app/helpers/authhelper.php';
 $isLogged = AuthHelper::isLogged(); 
-$userName = $_SESSION['USER_NAME'] ?? 'Admin';
+$useremail = $_SESSION['USER_NAME'] ?? 'Admin';
 ?>
 <body>
 
     <header class="header">
         
         <nav>
-            <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="nav-link">Libros:</a>
+            <a href="<?php echo BASE_URL . 'listarlibros'; ?>">Libros:</a>
             
             <?php if ($isLogged): ?>
                 <span class="adminsection">
-                    Hola, <?php echo htmlspecialchars($userName); ?>
+                    Hola, <?php echo htmlspecialchars($useremail); ?>
                     |
-                    <a href="<?php echo BASE_URL . 'logout'; ?>" class="btn-logout">Cerrar Sesión</a>
+                    <a href="<?php echo BASE_URL . 'logout'; ?>">Cerrar Sesión</a>
                 </span>
             <?php endif; ?>
         </nav>
