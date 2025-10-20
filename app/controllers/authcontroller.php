@@ -1,8 +1,8 @@
 <?php
 
-require_once 'helpers/authhelper.php';
-require_once 'views/authview.php'; 
-require_once 'models/adminmodel.php';
+require_once 'app/helpers/authhelper.php';
+require_once 'app/views/authview.php'; 
+require_once 'app/models/adminmodel.php';
 
 class AuthController {
     
@@ -19,7 +19,7 @@ class AuthController {
         $this->view->showlogin("", $request->user);
     }
 
-    public function verifyogin($request) {
+    public function verifylogin($request) {
         if(empty($_POST['email']) || empty($_POST['contraseña'])) {
             return $this->view->showLogin("Faltan datos obligatorios", $request->user);
         }
@@ -31,10 +31,13 @@ class AuthController {
 
       if($admindb && password_verify($contraseña, $admindb->contraseña)) {
       session_start(); 
-     $_SESSION['USER_ID'] = $admindb->id; 
-     $_SESSION['IS_LOGGED'] = true;
+       $_SESSION['USER_ID'] = $admindb->id; 
+       $_SESSION['IS_LOGGED'] = true;
       header("Location: ".BASE_URL."listarlibros"); 
-      return;
+      }
+      else { 
+       return $this->view->showlogin("Usuario o contraseña incorrecta", $request->user);
+   }
 }
 
     public function logout($request) {
@@ -42,7 +45,5 @@ class AuthController {
         header("Location: ".BASE_URL."login");
         return;
     }
-
-
-
 }
+

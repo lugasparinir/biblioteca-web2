@@ -1,7 +1,7 @@
 <?php
-require_once 'models/libromodel.php';
-require_once 'views/libroview.php';
-require_once 'models/generomodel.php';
+require_once 'app/models/libromodel.php';
+require_once 'app/views/libroview.php';
+require_once 'app/models/generomodel.php';
 
 
 class librocontroller{

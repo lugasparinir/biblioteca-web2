@@ -7,7 +7,7 @@ class libroModel {
     
     public function __construct() {
         if (!defined('MYSQL_HOST')) { 
-            require_once 'config.php'; 
+            require_once  ROOT_PATH . 'app/config.php';
         }
         
         // Conexión a la base de datos
@@ -35,20 +35,21 @@ function insertarlibro($nombre, $autor, $descripcion, $idgenero) {
     
     $query = $this->db->prepare("INSERT INTO libro (nombre, autor, descripcion, id_genero) VALUES(?,?,?,?)");
     $query->execute([$nombre, $autor, $descripcion, $idgenero]); 
-
-    
-}
-    function deleteLibro($id) {
+     }
+   
+   
+  function deleteLibro($id) {
         $query = $this->db->prepare('DELETE from libro where id = ?');
         $query->execute([$id]);
 
-        
-    }
+         }
 
   function updatelibro($id, $nombre, $autor, $descripcion, $idgenero) { 
     $query = $this->db->prepare('UPDATE libro SET nombre = ?, autor = ?, descripcion = ?, id_genero = ? WHERE id = ?');
     $query->execute([$nombre, $autor, $descripcion, $idgenero, $id]);
 }
+
+
 }
 
 

@@ -1,12 +1,15 @@
 <?php
-require_once 'middlewares/sessionmiddleware.php';
-require_once 'middlewares/guardmiddleware.php';
+require_once './app/middleware/sessionmiddleware.php';
+require_once './app/middleware/guardmiddleware.php';
 require_once './app/controllers/librocontroller.php';
 require_once './app/controllers/authcontroller.php';
 
-define('base_url','//'.$_SERVER['server_name'].':'.$_SERVER['server_port'].dirname($_SERVER['php_self']).'/');
+define('ROOT_PATH', __DIR__ . '/');
+if (isset($_SERVER['SERVER_NAME']) && isset($_SERVER['SERVER_PORT']) && isset($_SERVER['PHP_SELF'])) {
+    define('base_url','//'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']).'/');
+}
 
-$action='listarlibros' //accion por defecto
+$action='listarlibros'; //accion por defecto
 
 if(!empty($_GET['action'])){  
     $action=$_GET['action'];  //si no esta vacia la accion le asigno ese valor sino listeo

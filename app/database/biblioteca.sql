@@ -99,6 +99,13 @@ ALTER TABLE `libro`
   ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id-genero`) REFERENCES `genero` (`id_genero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
+INSERT INTO `genero` (`id_genero`, `nombre`) VALUES (1, 'romance');
+INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('librodeamor', 'juancho', 1);
+
+
+INSERT INTO `genero` (`id_genero`, `nombre`) VALUES (2, 'terror');
+INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('las aventuras', 'pepe', 2);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,20 +1,14 @@
 <?php
+class libroview {
 
-require_once 'helpers/authhelper.php';
+    public function showlibros($libros, $user) {
+        $cuenta = count($libros);
 
-class libroView {
-   private $base_url=BASE_URL;
-
-public function showlibros($libros, $islogged) {
-        
-        require 'templates/header.phtml';
-        require 'templates/listadolibros.phtml'; 
-        require 'templates/footer.phtml';
+    
+        require_once '../templates/listadolibros.phtml';
     }
 
-    public function showlibro($libro, $islogged) {
-        require 'templates/header.phtml';
-        require 'templates/librosingular.phtml';
-        require 'templates/footer.phtml';
+    public function showerror($error, $user) {
+        echo "<h1>$error</h1>";
     }
 }

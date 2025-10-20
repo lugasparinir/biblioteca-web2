@@ -1,0 +1,99 @@
+
+:root {
+    --color-primary: #1e70a6; 
+    --color-secondary: #004c8f; 
+    --color-background: #f4f4f9; 
+    --color-text: #333;
+    --color-error: #cc3333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.listalibros {
+    list-style: none; 
+    padding: 0;
+}
+
+.libro {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #e6f0f8;
+}
+
+
+
+
+.libro a {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
+
+
+.login-form, form {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+button[type="submit"] {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--color-primary);
+}
+
+.error-message {
+    color: var(--color-error);
+    background-color: #fdd;
+    padding: 10px;
+    border: 1px solid var(--color-error);
+    margin-bottom: 15px;
+    border-radius: 4px;
+}

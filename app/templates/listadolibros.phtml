@@ -1,4 +1,8 @@
+  <head>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
+</head>
 <?php if (!empty($libros)): ?>
+  
     <ul class="listalibros">
         <?php foreach ($libros as $libro): ?>
             <li class="libro">
@@ -8,12 +12,17 @@
                 </a>
                 
                 <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
-                
-                <p>Género: <a href="<?php echo BASE_URL . 'libros_por_genero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
-                            
-                <?php if ($islogged): ?>
-                    <?php endif; ?>
+                <p>Género: <a href="<?php echo BASE_URL . 'librosporgenero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
+
+                <?php if (isset($user) && $user): ?> 
+                    <div class="actions">
+                        | <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>">Editar</a> 
+                        | <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>">Borrar</a>
+                    </div>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
+    <p>No se encontraron libros para mostrar.</p>
+<?php endif; ?>
