@@ -106,6 +106,11 @@ INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('librodeamor', 'jua
 INSERT INTO `genero` (`id_genero`, `nombre`, `descripcion`) VALUES (2, 'terror','para un buen susto a la noche' );
 INSERT INTO `libro` (`nombre`, `autor`, `id_genero`) VALUES ('las aventuras', 'pepe', 2);
 
+
+INSERT INTO `admin` (`id`, `email`, `contraseña`) VALUES (1, 'webadmin','$2a$08$RiCm8sReuYI1OXAXEy8ccORY4kobyxIYRnb5hGF6Zk9iEJGj0FKqW' );
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
