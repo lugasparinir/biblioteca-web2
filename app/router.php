@@ -28,5 +28,11 @@ switch($params[0]){
     case 'borrarlibro':
         $Lcontroller=new librocontroller();
         $Lcontroller->deletelibro(); 
-       
+    case 'logout':
+        session_start();
+        session_destroy();
+        header("Location: " . BASE_URL . "listarlibros");
+
+
+
 }
