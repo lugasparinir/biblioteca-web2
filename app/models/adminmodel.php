@@ -4,7 +4,7 @@ protected $db;
     
     public function __construct() {
         if (!defined('MYSQL_HOST')) { 
-            require_once 'config.php';
+            require_once 'app/models/config.php';
         }
         
         // Conexion a la base de datos

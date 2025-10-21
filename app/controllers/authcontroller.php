@@ -14,9 +14,9 @@ class AuthController {
         $this->adminmodel= new adminmodel();
     }
 
-   
+    
      public function showlogin($request) {
-        $this->view->showlogin("", $request->user);
+        $this->view->showlogin("", $request->user); 
     }
 
     public function verifylogin($request) {
@@ -30,14 +30,14 @@ class AuthController {
         $admindb = $this->adminmodel->getbyemail($user);
 
       if($admindb && password_verify($contraseña, $admindb->contraseña)) {
-      session_start(); 
-       $_SESSION['USER_ID'] = $admindb->id; 
-       $_SESSION['IS_LOGGED'] = true;
+        $_SESSION['USER_ID'] = $admindb->id; 
+        $_SESSION['USER_NAME'] = $admindb->email; // almacena el email para el header
+        $_SESSION['IS_LOGGED'] = true;
       header("Location: ".BASE_URL."listarlibros"); 
       }
       else { 
-       return $this->view->showlogin("Usuario o contraseña incorrecta", $request->user);
-   }
+        return $this->view->showlogin("Usuario o contraseña incorrecta", $request->user);
+    }
 }
 
     public function logout($request) {

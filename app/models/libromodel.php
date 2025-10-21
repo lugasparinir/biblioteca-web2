@@ -7,10 +7,9 @@ class libroModel {
     
     public function __construct() {
         if (!defined('MYSQL_HOST')) { 
-            require_once 'config.php';
+            require_once  'app/models/config.php';
         }
-        
-        // Conexión a la base de datos
+        // Conexion a la base de datos
         $this->db = new PDO("mysql:host=".MYSQL_HOST.';dbname='.MYSQL_DB.";charset=utf8", MYSQL_USER, MYSQL_PASS);
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
@@ -31,11 +30,11 @@ public function getlibrobyId($id) {
     return $libro;
 }
 
-function insertarlibro($nombre, $autor, $descripcion, $idgenero) { 
-    
-    $query = $this->db->prepare("INSERT INTO libro (nombre, autor, descripcion, id_genero) VALUES(?,?,?,?)");
-    $query->execute([$nombre, $autor, $descripcion, $idgenero]); 
-     }
+ function insertarlibro($nombre, $autor, $descripcion, $idgenero) { 
+        
+        $query = $this->db->prepare("INSERT INTO libro (nombre, autor, descripcion, id_genero) VALUES(?,?,?,?)");
+        $query->execute([$nombre, $autor, $descripcion, $idgenero]); 
+    }
    
    
   function deleteLibro($id) {
@@ -51,6 +50,7 @@ function insertarlibro($nombre, $autor, $descripcion, $idgenero) {
 
 
 }
+
 
 
     

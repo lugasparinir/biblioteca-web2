@@ -1,28 +1,35 @@
-  <head>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
-</head>
-<?php if (!empty($libros)): ?>
-  
-    <ul class="listalibros">
+<?php require_once 'app/templates/header.phtml';  ?>
+
+<div class="container">
+    <?php if (isset($user) && $user): ?> 
+        <a href="<?php echo BASE_URL . 'agregarlibro'; ?>" class="button-add">Agregar Nuevo Libro</a>
+    <?php endif; ?>
+
+    <h1>Catálogo de Libros</h1>
+
+    <?php if (!empty($libros)): ?>
+        <ul class="listalibros">
         <?php foreach ($libros as $libro): ?>
             <li class="libro">
-                
                 <a href="<?php echo BASE_URL . 'mostrarlibro/' . $libro->id; ?>">
                     <h2><?php echo htmlspecialchars($libro->nombre); ?></h2> 
                 </a>
-                
+
                 <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
                 <p>Género: <a href="<?php echo BASE_URL . 'librosporgenero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
 
                 <?php if (isset($user) && $user): ?> 
-                    <div class="actions">
-                        | <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>">Editar</a> 
-                        | <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>">Borrar</a>
+                    <div class="actions list-actions">
+                        <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>" class="button-action-link button-edit">Editar</a> 
+                        |
+                        <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>" class="button-action-link button-delete">Borrar</a>
                     </div>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
-    </ul>
-<?php else: ?>
-    <p>No se encontraron libros para mostrar.</p>
-<?php endif; ?>
+        </ul>
+    <?php else: ?>
+        <p>No se encontraron libros para mostrar.</p>
+    <?php endif; ?>
+
+</div>

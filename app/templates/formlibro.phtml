@@ -1,30 +1,64 @@
  <head>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
 </head>
-<form  method="POST">
-    <div class="row">
-        <div  class="form-group">
-                <label>Titulo libro</label>
-                <input required name="titulo" type="text">
-        </div>
+<?php
+    
+    $editando = isset($libro->id);// si $libro tiene propiedad id se considera edición.
+   
+    $actionUrl = $editando ? BASE_URL . 'actualizarlibro' : BASE_URL . 'agregarlibro';
+    
+    $formTitle = $editando ? 'Editar Libro: ' . htmlspecialchars($libro->nombre ?? '') : 'Agregar Nuevo Libro';
+    
+   
+    $nombre = $libro->nombre ?? '';
+    $autor = $libro->autor ?? '';
+    $descripcion = $libro->descripcion ?? '';
+    $id_generoselec = $libro->id_genero ?? '';
+?>
 
-        <div>
-            <div class="form-group" >
-                <label>Genero</label>
-                <select required name="genero">
-                    <option value="1">romance</option>
-                    <option value="2">terror</option>
-                    <option value="3">fantasia</option>
+<head>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">
+</head>
 
-                </select>
+<div class="container">
+
+    <h1><?php echo $formTitle; ?></h1>
+
+    <form action="<?php echo $actionUrl; ?>" method="POST">
+        
+        <?php if ($editando): ?>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($libro->id); ?>">
+        <?php endif; ?>
+
+        <div class="row">
+            <div class="form-group">
+                <label>Título libro</label>
+                <input required name="titulo" type="text" value="<?php echo htmlspecialchars($nombre); ?>">
+            </div>
+
+            <div>
+                <div class="form-group" >
+                    <label>Género</label>
+                    <select required name="genero">
+                        <option value="">-- Seleccione Género --</option>
+                        <option value="1" <?php if ($id_generoselec== 1) echo 'selected'; ?>>romance</option>
+                        <option value="2" <?php if ($id_generoselec== 2) echo 'selected'; ?>>terror</option>
+                        <option value="3" <?php if ($id_generoselec == 3) echo 'selected'; ?>>fantasia</option>
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div >
-        <label class="form-group">Autor</label>
-        <textarea name="autor"></textarea>
-    </div>
+        <div class="form-group">
+            <label>Autor</label>
+            <input name="autor" type="text" value="<?php echo htmlspecialchars($autor); ?>">
+        </div>
 
-    <button type="submit">Guardar Libro</button>
-</form>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea name="descripcion"><?php echo htmlspecialchars($descripcion); ?></textarea>
+        </div>
+
+        <button type="submit">Guardar</button>
+    </form>
+</div>

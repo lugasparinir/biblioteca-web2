@@ -1,7 +1,5 @@
+<?php require_once 'app/templates/header.phtml'; ?>
 
-     <head>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
-</head>
 <div class="container">
     <form action="<?php echo BASE_URL . 'verifylogin'; ?>" method="POST" class="login-form">
         <h1>Iniciar Sesión</h1>
@@ -9,25 +7,20 @@
         <?php if (!empty($error)): ?>
             <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
-        
+
         <div class="form-group">
-            <label for="email">Email</label>
-            <input 
-                type="text" 
-                id="email" 
-                name="email" 
-                required 
-                placeholder="Ingresa tu email de administrador"
+            <label>Email o Usuario</label>
+            <input required name="email" type="email">
+        </div>
+
+        <div class="form-group">
+            <label >Contraseña</label>
+            <input  required  name="contraseña" type="password" placeholder="Ingresa tu contraseña"
             >
         </div>
-
-        <div class="form-group">
-            <label for="contraseña">Contraseña</label>
-            <input  type="password" id="contraseña" name="contraseña" required   placeholder="Ingresa tu contraseña" >
-        </div>
-
+        
         <button type="submit">Entrar</button>
+
     </form>
 </div>
-
 

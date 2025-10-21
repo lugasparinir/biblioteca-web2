@@ -2,12 +2,7 @@
 
 class guardmiddleware {
     public function run($request) {
-        
-        if (!defined('BASE_URL')) {
-             require_once 'app/models/config.php'; 
-        }
-
-        if ($request->user) {
+        if (isset($request->user) && $request->user) {// verifica que $request->user exista y no sea null
            return $request;
         } else { 
            header("Location: " . BASE_URL . "login"); 

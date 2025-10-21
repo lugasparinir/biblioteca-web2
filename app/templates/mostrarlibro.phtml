@@ -1,0 +1,39 @@
+
+<?php require_once 'app/templates/header.phtml'; ?>
+
+<div class="container">
+    
+    <?php if (isset($libro) && $libro): ?>
+        <article class="libro-detalle">
+            <h1><?php echo htmlspecialchars($libro->nombre); ?></h1>
+            
+            <hr>
+
+            <?php if (isset($user) && $user): ?>
+                <div class="actions admin-actions">
+                    <h3>Acciones de Administrador</h3>
+                    
+                    <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>" class="button-edit">
+                        <i class="fas fa-edit"></i> Editar Libro
+                    </a>
+                    
+                    <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>" class="button-delete" 
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">
+                        <i class="fas fa-trash-alt"></i> Borrar Libro
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="button-back">
+                Volver al Listado
+            </a>
+
+        </article>
+    <?php else: ?>
+        <p class="error-message">El libro solicitado no existe.</p>
+    <?php endif; ?>
+    
+</div>
+
+
+

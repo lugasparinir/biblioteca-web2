@@ -3,5 +3,5 @@
     const MYSQL_PASS = '';
     const MYSQL_DB = 'biblioteca';
     const MYSQL_HOST = 'localhost';
-    const BASE_URL = 'http://localhost/bibliotecaweb2/';
+   // const BASE_URL = 'http://localhost/bibliotecaweb2/';
     

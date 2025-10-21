@@ -1,26 +1,27 @@
-
-     <head>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Biblioteca Web</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">
+   
 </head>
-    
-<?php
-require_once 'app/helpers/authhelper.php';
-$isLogged = AuthHelper::isLogged(); 
-$useremail = $_SESSION['USER_NAME'] ?? 'Admin';
-?>
 <body>
 
-    <header class="header">
-        
+<header>
+    <div class="container header-content">
+        <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="logo">
+         Biblioteca
+        </a>
+
         <nav>
-            <a href="<?php echo BASE_URL . 'listarlibros'; ?>">Libros:</a>
-            
-            <?php if ($isLogged): ?>
-                <span class="adminsection">
-                    Hola, <?php echo htmlspecialchars($useremail); ?>
-                    |
-                    <a href="<?php echo BASE_URL . 'logout'; ?>">Cerrar Sesión</a>
-                </span>
+            <?php if (isset($user) && $user): ?>
+                <span class="user-greeting">Hola, <?php echo htmlspecialchars($user->email); ?>!</span>
+                <a href="<?php echo BASE_URL . 'logout'; ?>" class="button-action-link button-logout">Cerrar Sesión</a>
+            <?php else: ?>
+                <a href="<?php echo BASE_URL . 'login'; ?>" class="button-action-link button-login">Iniciar Sesión</a>
             <?php endif; ?>
         </nav>
-    </header>
+    </div>
+</header>

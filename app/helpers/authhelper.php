@@ -1,20 +1,33 @@
 <?php
+
 class Authhelper {
     
+    
+    public static function startsession() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
     public static function islogged() {
-        self::startsession();
+        self::startsession(); 
         if (isset($_SESSION['IS_LOGGED']) && $_SESSION['IS_LOGGED'] === true) {
-            
             return true;
         }
         return false;
     }
 
     public static function checklogged() {
-        if (!self::logged()) {
-            header("Location: " . self::$BASE_URL . "login");
-            die();
+        self::startsession(); 
+        
+        if (!self::islogged()) {
+             
+             if (!defined('BASE_URL')) {
+                 
+                 require_once 'app/models/config.php'; 
+             }
+             header("Location: " . BASE_URL . "login");
+             die();
         }
     }
-    
 }
