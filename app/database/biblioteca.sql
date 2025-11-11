@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2025 a las 18:52:02
+-- Tiempo de generación: 11-11-2025 a las 20:36:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,9 +39,8 @@ CREATE TABLE `genero` (
 
 INSERT INTO `genero` (`id_genero`, `nombre`, `descripcion`) VALUES
 (1, 'romance', 'amores muy bonitos'),
-(2, 'terror', 'para asustarse a la noche'),
 (3, 'fantasia', 'cosas magicas que usualmene disfrutan los niños'),
-(4, 'comedia', 'para pasar un buen rato y reirse');
+(4, 'comedia', 'para pasar un buen rato y reirse.');
 
 -- --------------------------------------------------------
 
@@ -54,7 +53,7 @@ CREATE TABLE `libro` (
   `titulo` varchar(255) DEFAULT NULL,
   `autor` text NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `id_genero` int(11) NOT NULL
+  `id_genero` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -65,7 +64,7 @@ INSERT INTO `libro` (`id`, `titulo`, `autor`, `descripcion`, `id_genero`) VALUES
 (17, 'romeo y julieta', 'william', 'tragica y clasica historia de amor', 1),
 (18, 'emma', 'jane austen', 'romance y descubrimiento personal de epoca', 1),
 (19, 'el hobbit', 'tolkien', 'comienzo de el señor de los anillos', 3),
-(21, 'it', 'stephen king', 'un payaso asesino asusta un grupo de niños', 2);
+(21, 'it', 'stephen king', 'un payaso asesino asusta un grupo de niños', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,7 +103,7 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id-genero` (`id_genero`);
+  ADD KEY `fk_genero_biblioteca` (`id_genero`);
 
 --
 -- Indices de la tabla `user`
@@ -115,6 +114,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `libro`
@@ -130,10 +135,9 @@ ALTER TABLE `libro`
 -- Filtros para la tabla `libro`
 --
 ALTER TABLE `libro`
-  ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`id_genero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_genero_biblioteca` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`id_genero`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
