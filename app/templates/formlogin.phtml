@@ -1,26 +1,31 @@
-<?php require_once 'app/templates/header.phtml'; ?>
+<?php 
+require_once ROOT_DIR . 'app/templates/header.phtml'; 
+?>
 
 <div class="container">
-    <form action="<?php echo BASE_URL . 'verifylogin'; ?>" method="POST" class="login-form">
+    <form action="<?php echo BASE_URL . 'auth'; ?>" method="POST" class="loginform">
         <h1>Iniciar Sesión</h1>
 
         <?php if (!empty($error)): ?>
-            <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+            <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
 
-        <div class="form-group">
+        <div class="form">
             <label>Email o Usuario</label>
             <input required name="email" type="email">
         </div>
 
-        <div class="form-group">
+        <div class="form">
             <label >Contraseña</label>
-            <input  required  name="contraseña" type="password" placeholder="Ingresa tu contraseña"
-            >
+            <input required name="contraseña" type="password" placeholder="Ingresa tu contraseña">
         </div>
         
         <button type="submit">Entrar</button>
 
     </form>
 </div>
+
+<?php 
+require_once ROOT_DIR . 'app/templates/footer.phtml'; 
+?>
 

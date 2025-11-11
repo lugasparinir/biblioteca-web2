@@ -1,4 +1,5 @@
-<?php require_once 'app/templates/header.phtml';  ?>
+<?php 
+?>
 
 <div class="container">
     <?php if (isset($user) && $user): ?> 
@@ -12,19 +13,12 @@
         <?php foreach ($libros as $libro): ?>
             <li class="libro">
                 <a href="<?php echo BASE_URL . 'mostrarlibro/' . $libro->id; ?>">
-                    <h2><?php echo htmlspecialchars($libro->nombre); ?></h2> 
+                    <h2><?php echo htmlspecialchars($libro->titulo); ?></h2> 
                 </a>
-
-                <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
-                <p>Género: <a href="<?php echo BASE_URL . 'librosporgenero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
-
-                <?php if (isset($user) && $user): ?> 
-                    <div class="actions list-actions">
-                        <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>" class="button-action-link button-edit">Editar</a> 
-                        |
-                        <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>" class="button-action-link button-delete">Borrar</a>
-                    </div>
-                <?php endif; ?>
+                
+                <p>Género: <a href="<?php echo BASE_URL . 'librosporgenero/' . $libro->id_genero; ?>">
+                    <?php echo htmlspecialchars($libro->nombre_genero); ?> 
+                </a></p>
             </li>
         <?php endforeach; ?>
         </ul>

@@ -1,64 +1,63 @@
- <head>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">>
-</head>
 <?php
-    
-    $editando = isset($libro->id);// si $libro tiene propiedad id se considera edición.
-   
-    $actionUrl = $editando ? BASE_URL . 'actualizarlibro' : BASE_URL . 'agregarlibro';
-    
-    $formTitle = $editando ? 'Editar Libro: ' . htmlspecialchars($libro->nombre ?? '') : 'Agregar Nuevo Libro';
-    
-   
-    $nombre = $libro->nombre ?? '';
-    $autor = $libro->autor ?? '';
-    $descripcion = $libro->descripcion ?? '';
-    $id_generoselec = $libro->id_genero ?? '';
-?>
+$is_edit = $libro !== null;
 
-<head>
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">
-</head>
+$actionUrl = BASE_URL . 'savelibro'; 
+
+$formTitle = $is_edit ? 'Editar Libro: ' . htmlspecialchars($libro->titulo ?? '') : 'Agregar Nuevo Libro';
+
+$titulo = $libro->titulo ?? '';
+$autor = $libro->autor ?? '';
+$descripcion = $libro->descripcion ?? '';
+$id_generoselec = $libro->id_genero ?? '';
+?>
 
 <div class="container">
 
     <h1><?php echo $formTitle; ?></h1>
+    
+    <?php if (isset($error) && $error): ?>
+        <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
 
     <form action="<?php echo $actionUrl; ?>" method="POST">
         
-        <?php if ($editando): ?>
+        <?php if ($is_edit): ?>
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($libro->id); ?>">
         <?php endif; ?>
 
         <div class="row">
-            <div class="form-group">
+            <div class="form">
                 <label>Título libro</label>
-                <input required name="titulo" type="text" value="<?php echo htmlspecialchars($nombre); ?>">
+                <input required name="titulo" type="text" value="<?php echo htmlspecialchars($titulo); ?>">
             </div>
 
             <div>
-                <div class="form-group" >
-                    <label>Género</label>
+                <div class="form" >
+                    <label>Genero</label>
                     <select required name="genero">
-                        <option value="">-- Seleccione Género --</option>
-                        <option value="1" <?php if ($id_generoselec== 1) echo 'selected'; ?>>romance</option>
-                        <option value="2" <?php if ($id_generoselec== 2) echo 'selected'; ?>>terror</option>
-                        <option value="3" <?php if ($id_generoselec == 3) echo 'selected'; ?>>fantasia</option>
-                    </select>
+                        
+                        <?php foreach ($generos as $genero_option): ?>
+                            <option value="<?php echo $genero_option->id_genero; ?>" 
+                                <?php if ($id_generoselec == $genero_option->id_genero) echo 'selected'; ?>>
+                                <?php echo htmlspecialchars($genero_option->nombre); ?>
+                            </option>
+                        <?php endforeach; ?>
+                        </select>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form">
             <label>Autor</label>
             <input name="autor" type="text" value="<?php echo htmlspecialchars($autor); ?>">
         </div>
 
-        <div class="form-group">
+        <div class="form">
             <label>Descripción</label>
             <textarea name="descripcion"><?php echo htmlspecialchars($descripcion); ?></textarea>
         </div>
 
         <button type="submit">Guardar</button>
+        <a href="<?php echo BASE_URL; ?>listarlibros" class="btn btn-secondary">Volver</a>
     </form>
 </div>

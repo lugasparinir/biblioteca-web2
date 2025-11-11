@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Biblioteca Web</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/basic.css">
-   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Biblioteca Web</title>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>app/style/style.css">
 </head>
 <body>
 
 <header>
-    <div class="container header-content">
-        <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="logo">
-         Biblioteca
-        </a>
+ <div class="lista">
+    <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="logo">
+        Biblioteca
+         </a>
 
-        <nav>
-            <?php if (isset($user) && $user): ?>
-                <span class="user-greeting">Hola, <?php echo htmlspecialchars($user->email); ?>!</span>
-                <a href="<?php echo BASE_URL . 'logout'; ?>" class="button-action-link button-logout">Cerrar Sesión</a>
-            <?php else: ?>
-                <a href="<?php echo BASE_URL . 'login'; ?>" class="button-action-link button-login">Iniciar Sesión</a>
-            <?php endif; ?>
-        </nav>
-    </div>
+ <nav>
+  <a href="<?php echo BASE_URL . 'listargeneros'; ?>">Géneros</a>
+ <?php if (isset($user) && $user): ?>
+         <span >Hola, <?php echo htmlspecialchars($user->email); ?>!</span>
+<a href="<?php echo BASE_URL . 'logout'; ?>" class="buttonlogout">Cerrar Sesión</a>
+ <?php else: ?>
+ <a href="<?php echo BASE_URL . 'login'; ?>" class="buttonlogin">Iniciar Sesión</a>
+ <?php endif; ?>
+ </nav>
+ </div>
 </header>
+<main>

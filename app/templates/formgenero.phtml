@@ -1,0 +1,44 @@
+<?php
+
+$is_edit = $genero !== null && isset($genero->id_genero);
+$title = $is_edit ? 'Editar Género: ' . htmlspecialchars($genero->nombre) : 'Agregar Genero';
+$nombre_value = $is_edit ? htmlspecialchars($genero->nombre) : '';
+$descripcion_value = $is_edit ? htmlspecialchars($genero->descripcion) : '';
+?>
+
+<div class="container">
+    <h1><?php echo $title; ?></h1>
+    
+    <?php if (isset($error) && $error): ?>
+        <p class="error"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+
+    <form action="<?php echo BASE_URL; ?>savegenero" method="POST">
+        
+        <?php if ($is_edit): ?>
+            <input type="hidden" name="id" value="<?php echo $genero->id_genero; ?>">
+        <?php endif; ?>
+
+        <div>
+            <label for="nombre" class="form">Nombre</label>
+            <input type="text" class="form" id="nombre" name="nombre" 
+                   value="<?php echo $nombre_value; ?>" required>
+            <div>
+                Ingrese el nombre del genero.
+            </div>
+        </div>
+
+        <div>
+            <label for="descripcion" class="form">Descripcion</label>
+            <textarea class="form" id="descripcion" name="descripcion" ><?php echo $descripcion_value; ?></textarea>
+        </div>
+
+        <button type="submit">
+            <?php echo $is_edit ? 'Guardar Cambios' : 'Crear Genero'; ?>
+        </button>
+        
+        <a href="<?php echo BASE_URL; ?>listargeneros">
+            Volver
+        </a>
+    </form>
+</div>

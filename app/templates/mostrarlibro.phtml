@@ -5,33 +5,32 @@
     
     <?php if (isset($libro) && $libro): ?>
         <article class="libro-detalle">
-            <h1><?php echo htmlspecialchars($libro->nombre); ?></h1>
-            
-            <hr>
+            <li class="libro">
+                <a href="<?php echo BASE_URL . 'mostrarlibro/' . $libro->id; ?>">
+                    <h2><?php echo htmlspecialchars($libro->titulo); ?></h2> 
+                </a>
 
-            <?php if (isset($user) && $user): ?>
-                <div class="actions admin-actions">
-                    <h3>Acciones de Administrador</h3>
-                    
-                    <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>" class="button-edit">
-                        <i class="fas fa-edit"></i> Editar Libro
-                    </a>
-                    
-                    <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>" class="button-delete" 
-                       onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">
-                        <i class="fas fa-trash-alt"></i> Borrar Libro
-                    </a>
-                </div>
-            <?php endif; ?>
-
-            <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="button-back">
+                <p>Autor: <?php echo htmlspecialchars($libro->autor); ?></p>
+                <p>Género: <a href="<?php echo BASE_URL . 'librosporgenero/' . $libro->id_genero; ?>"><?php echo htmlspecialchars($libro->nombre_genero); ?> </a></p>
+                <p>Descripcion: <?php echo htmlspecialchars($libro->descripcion); ?></p>
+                <?php if (isset($user) && $user): ?> 
+                    <div class="actions list-actions">
+                        <a href="<?php echo BASE_URL . 'editar/' . $libro->id; ?>" class="button-action-link button-edit">Editar</a> 
+                        |
+                        <a href="<?php echo BASE_URL . 'borrarlibro/' . $libro->id; ?>" class="button-action-link button-delete">Borrar</a>
+                    </div>
+                <?php endif; ?>
+            </li>
+        </ul>
+    <?php endif; ?>
+           
+           
+            <a href="<?php echo BASE_URL . 'listarlibros'; ?>" class="button">
                 Volver al Listado
             </a>
 
         </article>
-    <?php else: ?>
-        <p class="error-message">El libro solicitado no existe.</p>
-    <?php endif; ?>
+   
     
 </div>
 

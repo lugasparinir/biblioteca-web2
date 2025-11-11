@@ -1,0 +1,44 @@
+<div>
+    <h1>Generos</h1>
+    
+    <?php if ($user): ?>
+        <a href="<?php echo BASE_URL; ?>agregargenero" class="btnadmin">
+            Agregar Nuevo Genero
+        </a>
+    <?php endif; ?>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($generos as $genero): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($genero->nombre); ?></td>
+                    <td><?php echo htmlspecialchars($genero->descripcion); ?></td>
+                    
+                    <?php if ($user): ?>
+                        <td class="d-flex justify-content-around">
+                            
+                            <a href="<?php echo BASE_URL; ?>editargenero/<?php echo $genero->id_genero; ?>" class="btnadmin">
+                                Editar
+                            </a>
+                            
+                            <a href="<?php echo BASE_URL; ?>borrargenero/<?php echo $genero->id_genero; ?>" class="btnadmin<?php echo htmlspecialchars($genero->nombre); ?>?');">
+                                Borrar
+                            </a>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+    <?php if (empty($generos)): ?>
+        <p>No hay géneros cargados en la base de datos.</p>
+    <?php endif; ?>
+    
+</div>

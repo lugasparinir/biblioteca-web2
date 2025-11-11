@@ -1,75 +1,73 @@
 <?php
 
-
-require_once 'app/models/libromodel.php';
-require_once 'app/views/libroview.php';
-require_once 'app/models/generomodel.php'; // asumo que existe
-
+require_once ROOT_DIR . 'app/models/libromodel.php';
+require_once ROOT_DIR . 'app/views/libroview.php';
+require_once ROOT_DIR . 'app/models/generomodel.php';
 
 class librocontroller{
     private $model;
     private $view;
+    private $generoModel; 
 
-
-    
     public function __construct(){
-        $this->model=new libromodel();
-        $this->view=new libroview();
-        
+        $this->model = new libromodel();
+        $this->view = new libroview();
+        $this->generoModel = new generomodel(); 
     }
 
     public function showlibros($request){ 
-        $libros=$this->model->getalllibros();
-        $this->view->showlibros($libros,$request->user); 
-        }
-        
-    public function showlibro($request){ 
-        $libro = $this->model->getlibrobyId($request->id); 
-        $this->view->showlibro($libro, $request->user); 
+        $libros = $this->model->getalllibros();
+        $this->view->showlibros($libros, $request->user); 
+    }
+    
+    public function showLibrosByGenero($request) { 
+        $libros = $this->model->getLibrosByGenero($request->id); 
+        $this->view->showlibros($libros, $request->user); 
     }
 
+    public function showlibro($request){ 
+        $libro = $this->model->getlibrobyId($request->id); 
+        $this->view->showlibro($libro, $request->user, null); 
+    }
 
+    public function showAddForm($request) { 
+        $generos = $this->generoModel->getAllGeneros(); 
+        $this->view->showform(null, $generos, $request->user); 
+    }
 
-function addlibro($request){
+    public function updatelibro($request){ 
+        $libro = $this->model->getlibrobyId($request->id); 
+        $generos = $this->generoModel->getAllGeneros(); 
+        $this->view->showform($libro, $generos, $request->user); 
+    }
     
-   
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       
-        $tittle = $_POST['titulo'] ?? null;
+    // POST para guardar Alta y Edición
+    public function saveLibro($request){
+        $id = $_POST['id'] ?? null; 
+        $titulo = $_POST['titulo'] ?? null; // Usar 'titulo'
         $autor = $_POST['autor'] ?? null;
         $idgenero = $_POST['genero'] ?? null;
         $descrip = $_POST['descripcion'] ?? null;
-        
-     
-        if ($tittle && $autor && $idgenero) {
-            $this->model->insertarLibro($tittle, $autor, $descrip, $idgenero);
-            header("location:".BASE_URL."listarlibros"); 
-            return;
-        } else {
-        
-            header("location:".BASE_URL."agregarlibro"); 
-            return;
+
+        if (!$titulo || !$autor || !$idgenero) {
+            $error = "Faltan campos obligatorios.";
+            $generos = $this->generoModel->getAllGeneros();
+            $libro_data = (object)['id' => $id, 'titulo' => $titulo, 'autor' => $autor, 'descripcion' => $descrip, 'id_genero' => $idgenero];
+            return $this->view->showform($libro_data, $generos, $request->user, $error);
         }
-    } 
-    
-  
-    else {
-       
-        $this->view->showform(null, $request->user);
+
+        if ($id) {
+            $this->model->updateLibro($id, $titulo, $autor, $descrip, $idgenero);
+            $redirect_id = $id;
+        } else {
+            $redirect_id = $this->model->insertarlibro($titulo, $autor, $descrip, $idgenero);
+        }
+        
+        header("Location: " . BASE_URL . "mostrarlibro/$redirect_id"); 
     }
-}
 
     function deletelibro($request){
-
         $this->model->deletelibro($request->id); 
-        header("location:".BASE_URL."listarlibros"); 
-        return;
+        header("Location: " . BASE_URL . "listarlibros"); 
     }
-
-
-  public function updatelibro($request){ 
-    $libro = $this->model->getlibrobyId($request->id); 
-    $this->view->showform($libro, $request->user); 
-}
-    
 }
